@@ -1,0 +1,80 @@
+﻿<div ng-controller="employeesController">
+    <h2>Employees</h2>
+    <div class="row">
+        <button class="btn btn-primary pull-right" ng-click="showAddDialog()">Add Employee</button>
+    </div>
+    <br />
+    <div class="modal fade" id="modal-dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add Employee</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <form class="form-horizontal" name="form">
+                                <div class="form-group">
+                                    <label for="id" class="col-sm-2 control-label">Id</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="id" readonly="readonly" ng-model="employee.Id" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" ng-required ng-model="employee.Name" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="position" class="col-sm-2 control-label">Position</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" ng-required ng-model="employee.Position" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="departmentId" class="col-sm-2 control-label">Department</label>
+                                    <div class="col-sm-10">
+                                        <select  ng-model="employee.DepartmentId" >
+                                            <option ng-repeat="dptm in departments" value= "{{dptm.Id}}">{{dptm.Name}}</option> 
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group has-error">
+                                <div ng-repeat="error in errors" class="control-label">{{error}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" ng-click="saveEmployee()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table id="dpmts" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Department</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="employee in employees">
+                <tr>
+                    <td> <span>{{employee.Id}}</span></td>
+                    <td> <span>{{employee.Name}}</span></td>
+                    <td> <span>{{employee.Position}}</span></td>
+                    <td> <span>{{employee.Department.Name}}</span></td>
+                    <td> <button class="btn btn-danger" ng-click="deleteEmployee(employee)">DELETE</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
